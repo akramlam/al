@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ALJ Creative Studio - Landing Page
 
-## Getting Started
+A modern, professional one-page landing site for ALJ Creative Studio built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern Design**: Dark navy theme with cyan accents (#0B1220, #00AEEF)
+- **Fully Responsive**: Optimized for all devices
+- **Smooth Animations**: Framer Motion powered transitions
+- **Calendly Integration**: Built-in booking system
+- **SEO Optimized**: Meta tags and structured data
+- **Professional Structure**: Component-based architecture
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── globals.css          # Global styles
+│   ├── layout.tsx           # Root layout with SEO
+│   └── page.tsx             # Main landing page
+├── components/
+│   ├── ui/                  # Reusable UI components
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   └── Accordion.tsx
+│   └── sections/            # Page sections
+│       ├── Navbar.tsx
+│       ├── Hero.tsx
+│       ├── Services.tsx
+│       ├── Process.tsx
+│       ├── Creators.tsx
+│       ├── Portfolio.tsx
+│       ├── Timeline.tsx
+│       ├── CalendlySection.tsx
+│       ├── FAQ.tsx
+│       └── Footer.tsx
+├── hooks/
+│   └── useScrollAnimation.ts
+├── lib/
+│   └── data.ts              # Content data
+└── types/
+    └── index.ts             # TypeScript interfaces
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Sections
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Hero**: Compelling headline with CTA buttons
+2. **Services**: 6 service cards with icons
+3. **Process**: 5-step process visualization
+4. **Creators**: Collectif information and perks
+5. **Portfolio**: Project showcase grid
+6. **Timeline**: Company history and milestones
+7. **Calendly**: Booking integration with popup
+8. **FAQ**: Accordion-style questions
+9. **Footer**: Links and social media
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Setup Instructions
 
-## Learn More
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Update Calendly URL**:
+   - Open `src/components/sections/CalendlySection.tsx`
+   - Replace `YOUR_USERNAME` with your actual Calendly username
+   - Update both inline widget and popup widget URLs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Build for Production**:
+   ```bash
+   npm run build
+   npm start
+   ```
 
-## Deploy on Vercel
+## 🎯 Customization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Colors
+- Primary: `#0B1220` (Dark Navy)
+- Accent: `#00AEEF` (Cyan)
+- Text: `#FFFFFF` (White)
+- Secondary Text: `#9CA3AF` (Gray)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Content
+- Update `src/lib/data.ts` to modify services, projects, FAQ, etc.
+- Replace placeholder images with actual project images
+- Update social media links in `src/lib/data.ts`
+
+### Styling
+- Modify `src/app/globals.css` for global styles
+- Update component styles in individual component files
+- Adjust animations in Framer Motion components
+
+## 📱 Responsive Design
+
+- **Mobile**: Single column layout, stacked sections
+- **Tablet**: 2-column grids, optimized spacing
+- **Desktop**: Full multi-column layouts, hover effects
+
+## 🔧 Technical Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Animations**: Framer Motion
+- **Booking**: React Calendly
+- **Icons**: Emoji-based (easily replaceable)
+
+## 📈 Performance
+
+- Optimized images and animations
+- Lazy loading for better performance
+- Smooth scroll behavior
+- Minimal bundle size
+
+## 🚀 Deployment
+
+Ready for deployment on:
+- Vercel (recommended)
+- Netlify
+- Any Node.js hosting platform
+
+## 📞 Support
+
+For questions or customization requests, contact the development team.
+
+---
+
+**ALJ Creative Studio** - Réunir les créateurs de contenu pour scaler vos projets vidéo.
