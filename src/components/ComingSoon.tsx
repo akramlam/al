@@ -104,7 +104,7 @@ export default function ComingSoon() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="absolute left-1/2 -translate-x-1/2 top-[18vh] sm:top-[20vh] md:top-[15vh] lg:top-[17vh] flex flex-col items-center space-y-2 text-center"
+        className="absolute left-1/2 -translate-x-1/2 top-[15vh] sm:top-[15vh] md:top-[15vh] lg:top-[17vh] flex flex-col items-center space-y-2 text-center"
         style={{
           transform: `translateX(${-50 + mousePosition.x * 2}%) translateY(${mousePosition.y * 5}px)`,
         }}
@@ -124,7 +124,7 @@ export default function ComingSoon() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 translate-y-6 flex flex-col items-center"
+        className="absolute left-1/2 top-[42%] sm:top-1/2 -translate-x-1/2 -translate-y-1/2 translate-y-6 flex flex-col items-center"
       >
         <div className="inline-flex items-center gap-4 sm:gap-6 md:gap-8">
           <div className="w-12 sm:w-16 md:w-24 lg:w-32 h-px bg-gradient-to-r from-transparent to-cyan-400/60"></div>
