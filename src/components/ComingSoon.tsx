@@ -124,7 +124,7 @@ export default function ComingSoon() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-        className="absolute left-1/2 top-[42%] sm:top-1/2 -translate-x-1/2 -translate-y-1/2 translate-y-6 flex flex-col items-center"
+        className="absolute left-1/2 top-[55%] sm:top-[58%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
       >
         <div className="inline-flex items-center gap-4 sm:gap-6 md:gap-8">
           <div className="w-12 sm:w-16 md:w-24 lg:w-32 h-px bg-gradient-to-r from-transparent to-cyan-400/60"></div>
@@ -141,7 +141,7 @@ export default function ComingSoon() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.6, ease: "easeOut" }}
-        className="absolute left-1/2 top-[70%] -translate-x-1/2 flex items-center gap-6 sm:gap-8"
+        className="absolute left-1/2 top-[75%] sm:top-[78%] -translate-x-1/2 flex items-center gap-6 sm:gap-8"
       >
         {socialLinks.map((social, index) => {
           const Icon = social.icon;
