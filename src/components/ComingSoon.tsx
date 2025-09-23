@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
+import AnoAI from './animated-shader-background';
 
 export default function ComingSoon() {
   const [mounted, setMounted] = useState(false);
@@ -54,8 +55,8 @@ export default function ComingSoon() {
   ];
 
   return (
-    <section className="relative min-h-screen bg-[#0B1220] text-white overflow-hidden">
-      {/* Background */}
+    <div className="w-full h-screen bg-black">
+    <AnoAI/>
       <div className="absolute inset-0">
         <motion.div
           animate={{ x: [0, 100, 0], y: [0, -100, 0] }}
@@ -97,7 +98,7 @@ export default function ComingSoon() {
       </div>
 
       {/* Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,174,239,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,174,239,0.03)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+      {/* <div className="absolute inset-0 bg-[linear-gradient(rgba(0,174,239,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,174,239,0.03)_1px,transparent_1px)] bg-[size:32px_32px]"></div> */}
 
       {/* ALJ + CREATIVE STUDIO */}
       <motion.div
@@ -217,6 +218,6 @@ export default function ComingSoon() {
         />
         <div className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent mt-px"></div>
       </div>
-    </section>
+    </div>
   );
 }
