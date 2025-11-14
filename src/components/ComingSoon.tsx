@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
-import AnoAI from './animated-shader-background';
 
 export default function ComingSoon() {
   const [mounted, setMounted] = useState(false);
@@ -55,8 +54,8 @@ export default function ComingSoon() {
   ];
 
   return (
-    <div className="w-full h-screen bg-black">
-    <AnoAI/>
+    <div className="w-full h-screen bg-black relative overflow-hidden">
+      {/* Simplified Background Effects */}
       <div className="absolute inset-0">
         <motion.div
           animate={{ x: [0, 100, 0], y: [0, -100, 0] }}
@@ -71,9 +70,9 @@ export default function ComingSoon() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,174,239,0.1)_0%,transparent_70%)] rounded-full"></div>
       </div>
 
-      {/* Particles */}
+      {/* Simplified Particles - Reduced count for better performance */}
       <div className="absolute inset-0 pointer-events-none">
-        {particles.map((particle) => (
+        {particles.slice(0, 10).map((particle) => (
           <motion.div
             key={particle.id}
             className="absolute bg-cyan-400/20 rounded-full"
@@ -97,25 +96,22 @@ export default function ComingSoon() {
         ))}
       </div>
 
-      {/* Grid */}
-      {/* <div className="absolute inset-0 bg-[linear-gradient(rgba(0,174,239,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,174,239,0.03)_1px,transparent_1px)] bg-[size:32px_32px]"></div> */}
-
       {/* ALJ + CREATIVE STUDIO */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="absolute left-1/2 -translate-x-1/2 top-[15vh] sm:top-[15vh] md:top-[15vh] lg:top-[17vh] flex flex-col items-center space-y-2 text-center"
+        className="absolute left-1/2 -translate-x-1/2 top-[20vh] sm:top-[18vh] md:top-[20vh] lg:top-[25vh] flex flex-col items-center space-y-4 text-center px-4"
         style={{
           transform: `translateX(${-50 + mousePosition.x * 2}%) translateY(${mousePosition.y * 5}px)`,
         }}
       >
-        <h1 className="text-6xl sm:text-7xl md:text-9xl lg:text-[12rem] font-extralight tracking-tight leading-none">
-          <span className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-extralight tracking-tight leading-none">
+          <span className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent drop-shadow-lg">
             ALJ
           </span>
         </h1>
-        <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extralight text-white/70 tracking-[.35em] block">
+        <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extralight text-white/70 tracking-[.35em] block">
           CREATIVE STUDIO
         </span>
       </motion.div>
@@ -125,14 +121,14 @@ export default function ComingSoon() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-        className="absolute left-1/2 top-[55%] sm:top-[58%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
+        className="absolute left-1/2 top-[60vh] sm:top-[58vh] md:top-[60vh] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
       >
-        <div className="inline-flex items-center gap-4 sm:gap-6 md:gap-8">
-          <div className="w-12 sm:w-16 md:w-24 lg:w-32 h-px bg-gradient-to-r from-transparent to-cyan-400/60"></div>
-          <h2 className="text-lg sm:text-xl md:text-2xl font-extralight tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] text-cyan-300/80 uppercase whitespace-nowrap">
+        <div className="inline-flex items-center gap-6 sm:gap-8 md:gap-12">
+          <div className="w-16 sm:w-20 md:w-32 lg:w-40 h-px bg-gradient-to-r from-transparent to-cyan-400/60"></div>
+          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-extralight tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] text-cyan-300/90 uppercase whitespace-nowrap">
             Coming Soon
           </h2>
-          <div className="w-12 sm:w-16 md:w-24 lg:w-32 h-px bg-gradient-to-l from-transparent to-cyan-400/60"></div>
+          <div className="w-16 sm:w-20 md:w-32 lg:w-40 h-px bg-gradient-to-l from-transparent to-cyan-400/60"></div>
         </div>
       </motion.div>
 
@@ -142,7 +138,7 @@ export default function ComingSoon() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.6, ease: "easeOut" }}
-        className="absolute left-1/2 top-[75%] sm:top-[78%] -translate-x-1/2 flex items-center gap-6 sm:gap-8"
+        className="absolute left-1/2 top-[80vh] sm:top-[82vh] md:top-[85vh] -translate-x-1/2 flex items-center justify-center gap-4 sm:gap-6 md:gap-8 px-4"
       >
         {socialLinks.map((social, index) => {
           const Icon = social.icon;
@@ -165,32 +161,26 @@ export default function ComingSoon() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="relative group block p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
+                className="relative group block focus:outline-none focus:ring-2 focus:ring-cyan-400/60 rounded-full"
                 onHoverStart={() => setHoveredIndex(index)}
                 onHoverEnd={() => setHoveredIndex(null)}
                 whileHover={{
-                  scale: 1.2,
-                  rotateY: 15,
-                  rotateX: -10,
-                  z: 50,
+                  scale: 1.1,
+                  y: -5,
                 }}
                 whileTap={{ scale: 0.95 }}
-                style={{
-                  transformStyle: "preserve-3d",
-                  transform: `translateX(${mousePosition.x * (5 - index)}px) translateY(${mousePosition.y * (5 - index)}px)`,
-                }}
               >
                 <div
-                  className={`absolute -inset-4 bg-gradient-to-r ${social.gradient} rounded-full opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`}
+                  className={`absolute -inset-2 bg-gradient-to-r ${social.gradient} rounded-full opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500`}
                   style={{
-                    boxShadow: hoveredIndex === index ? `0 20px 40px ${social.shadowColor}` : '',
+                    boxShadow: hoveredIndex === index ? `0 10px 25px ${social.shadowColor}` : '',
                   }}
                 />
 
-                <div className="relative p-6 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.1]
+                <div className="relative p-3 sm:p-4 md:p-5 rounded-full bg-white/[0.03] backdrop-blur-xl border border-white/[0.1]
                   group-hover:border-cyan-400/40 group-hover:bg-white/[0.08]
                   transition-all duration-500 overflow-hidden
-                  shadow-xl shadow-black/20 group-hover:shadow-2xl"
+                  shadow-lg shadow-black/20 group-hover:shadow-xl"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${social.gradient} opacity-0
                     group-hover:opacity-10 transition-opacity duration-500`} />
@@ -200,7 +190,7 @@ export default function ComingSoon() {
                     animate={hoveredIndex === index ? { rotate: social.hoverRotate } : { rotate: 0 }}
                     transition={{ duration: 0.8, ease: "easeInOut" }}
                   >
-                    <Icon className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 drop-shadow-lg" />
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 drop-shadow-lg" />
                   </motion.div>
                 </div>
               </motion.a>

@@ -86,6 +86,14 @@
     transform: translateY(-10px);
     }
   }
+  @keyframes moveBackground {
+  from {
+    background-position: 0% 0%;
+    }
+  to {
+    background-position: 0% -1000%;
+    }
+  }
 }
 
 * {
@@ -94,7 +102,6 @@
   margin: 0;
 }
 html, body {
-  overflow: hidden;
   height: 100%;
 }
 
@@ -112,6 +119,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #0B1220;
   color: #E6F1FF;
+  min-height: 100vh;
 }
 
 /* Custom scrollbar */
@@ -212,6 +220,28 @@ body {
 
   .gap-6 {
     gap: 1rem;
+  }
+
+  /* Mobile touch optimizations */
+  button, .cursor-pointer {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Reduce motion on mobile for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Mobile-specific floating element adjustments */
+  .floating-element {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
 

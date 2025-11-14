@@ -14,8 +14,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ALJ Creative Studio",
-  description: "ALJ Creative Studio",
+  title: "ALJ Creative Studio - Studio Créatif Vidéo",
+  description: "ALJ Creative Studio réunit les meilleurs créateurs de contenu pour scaler vos projets vidéo. Production, montage et stratégie marketing digitale.",
+  keywords: ["studio créatif", "production vidéo", "créateurs de contenu", "marketing digital", "France"],
+  authors: [{ name: "ALJ Creative Studio" }],
+  openGraph: {
+    title: "ALJ Creative Studio - Studio Créatif Vidéo",
+    description: "Réunir les créateurs de contenu pour scaler vos projets vidéo",
+    type: "website",
+    locale: "fr_FR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ALJ Creative Studio",
+    description: "Studio créatif vidéo professionnel",
+  },
 };
 
 export default function RootLayout({
