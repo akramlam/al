@@ -2,6 +2,22 @@
 
 A modern, professional one-page landing site for ALJ Creative Studio built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion.
 
+## 🔍 Check if You Have This Project
+
+Use this PowerShell command to search for the project in your user directory:
+
+```powershell
+Get-ChildItem -Path $HOME -Recurse -Directory -Filter "alj" -Depth 5 -ErrorAction SilentlyContinue | Select-Object FullName
+```
+
+Or search by the `package.json` name (faster with limited depth):
+
+```powershell
+Get-ChildItem -Path $HOME -Recurse -Include "package.json" -Depth 5 -ErrorAction SilentlyContinue | ForEach-Object { if ((Get-Content $_.FullName -Raw) -match '"name":\s*"alj"') { $_.DirectoryName } }
+```
+
+> **Tip**: Adjust `-Depth 5` to search deeper, or replace `$HOME` with a specific folder (e.g., `C:\Dev`) to narrow the search.
+
 ## 🚀 Features
 
 - **Modern Design**: Dark navy theme with cyan accents (#0B1220, #00AEEF)
