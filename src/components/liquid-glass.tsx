@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 // Types
 interface GlassEffectProps {
@@ -82,10 +83,12 @@ const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
   >
     <div className="flex items-center justify-center gap-2 rounded-3xl p-3 py-0 px-0.5 overflow-hidden">
       {icons.map((icon, index) => (
-        <img
+        <Image
           key={index}
           src={icon.src}
           alt={icon.alt}
+          width={64}
+          height={64}
           className="w-16 h-16 transition-all duration-700 hover:scale-110 cursor-pointer"
           style={{
             transformOrigin: "center center",

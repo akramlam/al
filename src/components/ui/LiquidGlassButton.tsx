@@ -41,33 +41,6 @@ const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
     xl: 'h-16 px-12 text-xl',
   }
 
-  const variantClasses = {
-    primary: `
-      bg-gradient-to-r from-[${glowColor}]/20 via-[${glowColor}]/10 to-[${glowColor}]/20
-      border border-[${glowColor}]/30
-      text-white
-      shadow-lg shadow-[${glowColor}]/25
-    `,
-    secondary: `
-      bg-gradient-to-r from-slate-800/40 via-slate-700/20 to-slate-800/40
-      border border-slate-600/50
-      text-slate-200
-      shadow-lg shadow-slate-900/50
-    `,
-    outline: `
-      bg-transparent
-      border-2 border-[${glowColor}]/40
-      text-[${glowColor}]
-      shadow-lg shadow-[${glowColor}]/20
-    `,
-    ghost: `
-      bg-white/5
-      border border-white/10
-      text-white/90
-      shadow-lg shadow-black/20
-    `,
-  }
-
   const intensityClasses = {
     low: 'backdrop-blur-sm',
     medium: 'backdrop-blur-md',
