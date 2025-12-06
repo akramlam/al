@@ -1,17 +1,68 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Montserrat, Inter } from "next/font/google";
+// import localFont from "next/font/local"; // Uncomment when adding licensed fonts
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Google Fonts - Primary & Display
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-primary",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montserrat = Montserrat({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+// Licensed Fonts - Local (user provides font files)
+// NOTE: Uncomment these when you add the licensed font files to src/fonts/
+// See src/fonts/README.md for instructions
+// const pragmatica = localFont({
+//   src: [
+//     {
+//       path: "../fonts/Pragmatica-Regular.woff2",
+//       weight: "400",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/Pragmatica-Bold.woff2",
+//       weight: "700",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-body",
+//   display: "swap",
+//   fallback: ["Inter", "system-ui", "sans-serif"],
+// });
+
+// const gotham = localFont({
+//   src: [
+//     {
+//       path: "../fonts/Gotham-Medium.woff2",
+//       weight: "500",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/Gotham-Bold.woff2",
+//       weight: "700",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-heading",
+//   display: "swap",
+//   fallback: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+// });
 
 export const metadata: Metadata = {
   title: "ALJ Creative Studio - Studio Créatif Vidéo",
@@ -37,9 +88,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${plusJakartaSans.variable} ${montserrat.variable} ${inter.variable} antialiased`}
       >
         {children}
         <Analytics />

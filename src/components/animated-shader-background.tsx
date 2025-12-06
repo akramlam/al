@@ -1,7 +1,15 @@
+/**
+ * Animated Shader Background - ALJ Studio Creative
+ * Brand Book 2025 Compliant
+ *
+ * THREE.js shader creating cinematic aurora effect
+ * Uses brand colors: Midnight Navy, Royal Blue, Saffron Orange, Amber
+ */
+
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-const AnoAI = () => {
+const AnimatedShaderBackground = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -69,12 +77,28 @@ const AnoAI = () => {
           for (float i = 0.0; i < 35.0; i++) {
             v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 3.0 + i) * 0.003, cos(iTime * 3.5 - i) * 0.003);
             float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / 35.0));
-            vec4 auroraColors = vec4(
-              0.1 + 0.3 * sin(i * 0.2 + iTime * 0.4),
-              0.3 + 0.5 * cos(i * 0.3 + iTime * 0.5),
-              0.7 + 0.3 * sin(i * 0.4 + iTime * 0.3),
-              1.0
+
+            // ALJ Studio Creative Brand Colors
+            // Midnight Navy: #0A3070, Royal Blue: #0344AA, Saffron Orange: #F18701, Amber: #F7B801
+            float colorMix = sin(i * 0.15 + iTime * 0.3) * 0.5 + 0.5;
+            float warmCool = cos(i * 0.25 + iTime * 0.2) * 0.5 + 0.5;
+
+            // Blend between cool blues and warm oranges
+            vec3 coolColor = mix(
+              vec3(0.039, 0.188, 0.439), // Midnight Navy
+              vec3(0.012, 0.267, 0.667),  // Royal Blue
+              sin(i * 0.2 + iTime * 0.4) * 0.5 + 0.5
             );
+
+            vec3 warmColor = mix(
+              vec3(0.945, 0.529, 0.004), // Saffron Orange
+              vec3(0.969, 0.722, 0.004),  // Amber
+              cos(i * 0.3 + iTime * 0.5) * 0.5 + 0.5
+            );
+
+            vec3 finalColor = mix(coolColor, warmColor, warmCool);
+
+            vec4 auroraColors = vec4(finalColor, 1.0);
             vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.8)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
             float thinnessFactor = smoothstep(0.0, 1.0, i / 35.0) * 0.6;
             o += currentContribution * (1.0 + tailNoise * 0.8) * thinnessFactor;
@@ -117,10 +141,10 @@ const AnoAI = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative overflow-x-hidden">
-      <div className="relative z-10 divider" />
+    <div ref={containerRef} className="fixed inset-0 -z-10 overflow-hidden">
+      <div className="relative z-10" />
     </div>
   );
 };
 
-export default AnoAI;
+export default AnimatedShaderBackground;

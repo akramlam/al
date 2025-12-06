@@ -1,64 +1,229 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+'use client';
 
-import { cn } from "@/lib/utils"
+/**
+ * Button Component - ALJ Studio Creative
+ * Brand Book 2025 Compliant
+ *
+ * Unified button component replacing all button implementations
+ * Supports: primary, secondary, outline, ghost, link variants
+ */
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden group",
-  {
-    variants: {
-      variant: {
-        default: "bg-gradient-to-r from-[#00AEEF] to-[#0098d4] text-white shadow-lg hover:shadow-xl hover:shadow-[#00AEEF]/25 hover:scale-105 active:scale-95 rounded-xl border border-[#00AEEF]/20",
-        destructive:
-          "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg hover:shadow-xl hover:shadow-red-500/25 hover:scale-105 active:scale-95 rounded-xl",
-        outline:
-          "border-2 border-[#00AEEF]/40 bg-transparent text-[#00AEEF] hover:bg-[#00AEEF]/10 hover:border-[#00AEEF]/60 hover:shadow-lg hover:shadow-[#00AEEF]/20 rounded-xl backdrop-blur-sm",
-        secondary:
-          "bg-gradient-to-r from-slate-700 to-slate-800 text-white border border-slate-600/50 hover:from-slate-600 hover:to-slate-700 hover:shadow-lg rounded-xl",
-        ghost: "hover:bg-[#00AEEF]/10 hover:text-[#00AEEF] rounded-xl",
-        link: "text-[#00AEEF] underline-offset-4 hover:underline",
-        premium: "bg-gradient-to-r from-[#00AEEF] via-cyan-500 to-blue-600 text-white shadow-2xl hover:shadow-[#00AEEF]/40 hover:scale-105 active:scale-95 rounded-2xl border border-cyan-400/30",
-        glass: "bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 rounded-xl shadow-xl",
-      },
-      size: {
-        default: "h-11 px-6 py-2 text-sm",
-        sm: "h-9 px-4 text-sm rounded-lg",
-        lg: "h-14 px-8 py-3 text-lg rounded-xl",
-        xl: "h-16 px-12 py-4 text-xl rounded-2xl",
-        icon: "h-11 w-11 rounded-xl",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
-)
+import React, { forwardRef } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import { buttonPreset } from '@/lib/animations';
+import { cn } from '@/lib/utils';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+// ============================================================================
+// TYPES
+// ============================================================================
+
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
+
+export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'size'> {
+  /** Button visual style variant */
+  variant?: ButtonVariant;
+  /** Button size */
+  size?: ButtonSize;
+  /** Show loading spinner */
+  loading?: boolean;
+  /** Icon to display before text */
+  iconLeft?: React.ReactNode;
+  /** Icon to display after text */
+  iconRight?: React.ReactNode;
+  /** Full width button */
+  fullWidth?: boolean;
+  /** Children content */
+  children?: React.ReactNode;
+  /** Additional CSS classes */
+  className?: string;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+// ============================================================================
+// STYLES
+// ============================================================================
+
+const baseStyles = `
+  inline-flex items-center justify-center gap-2
+  font-heading font-semibold
+  rounded-xl
+  transition-all duration-300
+  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-orange focus-visible:ring-offset-2 focus-visible:ring-offset-midnight-navy
+  disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none
+  relative overflow-hidden
+`;
+
+const variantStyles: Record<ButtonVariant, string> = {
+  primary: `
+    bg-gradient-to-r from-saffron-orange to-amber
+    text-brand-black
+    shadow-glow-orange
+    hover:shadow-glow-orange-lg
+    active:shadow-glow-orange
+  `,
+  secondary: `
+    bg-gradient-to-r from-royal-blue to-midnight-navy
+    text-brand-off-white
+    shadow-glow-blue
+    hover:shadow-glow-blue-lg
+    active:shadow-glow-blue
+  `,
+  outline: `
+    bg-transparent
+    text-brand-off-white
+    border-2 border-saffron-orange
+    hover:bg-saffron-orange/10
+    hover:border-amber
+    active:bg-saffron-orange/20
+  `,
+  ghost: `
+    bg-transparent
+    text-brand-off-white
+    hover:bg-white/10
+    active:bg-white/20
+  `,
+  link: `
+    bg-transparent
+    text-saffron-orange
+    underline-offset-4
+    hover:underline
+    hover:text-amber
+    active:text-saffron-orange
+    shadow-none
+  `,
+};
+
+const sizeStyles: Record<ButtonSize, string> = {
+  sm: 'px-4 py-2 text-sm min-h-[36px]',
+  md: 'px-6 py-3 text-base min-h-[44px]',
+  lg: 'px-8 py-4 text-lg min-h-[52px]',
+  xl: 'px-10 py-5 text-xl min-h-[60px]',
+};
+
+// ============================================================================
+// COMPONENT
+// ============================================================================
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      variant = 'primary',
+      size = 'md',
+      loading = false,
+      iconLeft,
+      iconRight,
+      fullWidth = false,
+      children,
+      className,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
+    const isDisabled = disabled || loading;
+
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+      <motion.button
         ref={ref}
+        disabled={isDisabled}
+        initial="rest"
+        whileHover={!isDisabled ? 'hover' : undefined}
+        whileTap={!isDisabled ? 'tap' : undefined}
+        variants={variant === 'link' ? undefined : buttonPreset}
+        className={cn(
+          baseStyles,
+          variantStyles[variant],
+          sizeStyles[size],
+          fullWidth && 'w-full',
+          className
+        )}
         {...props}
       >
-        {(variant === 'premium' || variant === 'default') && (
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+        {/* Loading Spinner */}
+        {loading && (
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center bg-inherit"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Spinner size={size} variant={variant} />
+          </motion.div>
         )}
-        <span className="relative z-10">{children}</span>
-      </Comp>
-    )
-  },
-)
-Button.displayName = "Button"
 
-export { Button, buttonVariants }
+        {/* Content - Hidden when loading */}
+        <span
+          className={cn(
+            'inline-flex items-center justify-center gap-2',
+            loading && 'invisible'
+          )}
+        >
+          {iconLeft && <span className="inline-flex shrink-0">{iconLeft}</span>}
+          {children}
+          {iconRight && <span className="inline-flex shrink-0">{iconRight}</span>}
+        </span>
+
+        {/* Shine effect on hover (primary & secondary only) */}
+        {(variant === 'primary' || variant === 'secondary') && (
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            initial={{ x: '-200%' }}
+            whileHover={{ x: '200%' }}
+            transition={{ duration: 1.5, ease: 'linear' }}
+            style={{ pointerEvents: 'none' }}
+          />
+        )}
+      </motion.button>
+    );
+  }
+);
+
+Button.displayName = 'Button';
+
+// ============================================================================
+// LOADING SPINNER COMPONENT
+// ============================================================================
+
+interface SpinnerProps {
+  size: ButtonSize;
+  variant: ButtonVariant;
+}
+
+const Spinner: React.FC<SpinnerProps> = ({ size, variant }) => {
+  const spinnerSizes = {
+    sm: 'w-4 h-4',
+    md: 'w-5 h-5',
+    lg: 'w-6 h-6',
+    xl: 'w-7 h-7',
+  };
+
+  const spinnerColors = {
+    primary: 'border-brand-black',
+    secondary: 'border-brand-off-white',
+    outline: 'border-saffron-orange',
+    ghost: 'border-brand-off-white',
+    link: 'border-saffron-orange',
+  };
+
+  return (
+    <motion.div
+      className={cn(
+        'border-2 border-t-transparent rounded-full',
+        spinnerSizes[size],
+        spinnerColors[variant]
+      )}
+      animate={{ rotate: 360 }}
+      transition={{
+        duration: 1,
+        repeat: Infinity,
+        ease: 'linear',
+      }}
+    />
+  );
+};
+
+// ============================================================================
+// EXPORTS
+// ============================================================================
+
+export default Button;
