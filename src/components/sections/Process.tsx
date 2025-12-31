@@ -1,175 +1,159 @@
 'use client';
 
 /**
- * Process Timeline Section - ALJ Studio Creative - REDESIGNED
- * Clean, modern alternating timeline with better visual design
+ * Process Section - ALJ Studio Creative
+ * Brand Book 2025 - Vision & Mission Style
  */
 
 import { motion } from 'framer-motion';
-import { processSteps } from '@/lib/data';
-import { Heading } from '@/components/ui/Heading';
-import { Text } from '@/components/ui/Text';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
+import Image from 'next/image';
 
 export default function Process() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+
   return (
-    <section id="process" className="py-32 relative overflow-hidden bg-black">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-midnight-navy/20 to-black" />
-      <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-saffron-orange/30 to-transparent" />
+    <section id="process" className="relative overflow-hidden" ref={ref}>
+      {/* Vision Section - Blue Background */}
+      <div className="relative bg-midnight-navy">
+        <div className="grid lg:grid-cols-2 min-h-[80vh]">
+          {/* Left - Content */}
+          <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-24">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="text-8xl md:text-9xl font-display font-black text-white/10 absolute top-20 left-6 lg:left-20">
+                (02)
+              </span>
 
-      <div className="container-site relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-24"
-        >
+              <h2 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white leading-[0.85] tracking-tight mb-8">
+                ALJ
+                <br />
+                <span className="text-soft-steel-blue">VISION</span>
+              </h2>
+
+              <p className="text-lg md:text-xl text-soft-steel-blue max-w-xl leading-relaxed font-body">
+                To establish <span className="text-white font-bold">ALJ STUDIO CREATIVE</span> as Morocco&apos;s leading bold and artistic video studio, delivering{' '}
+                <span className="text-saffron-orange font-semibold">high-impact</span>,{' '}
+                <span className="text-amber font-semibold">trustworthy</span>, and{' '}
+                <span className="text-white font-semibold">modern</span> creative services that support businesses across the country.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Right - Image */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="inline-block mb-6"
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative hidden lg:block"
           >
-            <span className="px-6 py-2 rounded-full bg-gradient-to-r from-saffron-orange/20 to-amber/20 border border-saffron-orange/30 text-saffron-orange font-heading text-sm font-semibold backdrop-blur-sm">
-              Notre Processus
-            </span>
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-midnight-navy/50 z-10" />
+            <Image
+              src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop"
+              alt="ALJ Studio Vision"
+              fill
+              className="object-cover grayscale"
+            />
+            {/* Framed Portrait */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-80 bg-white p-4 z-20 shadow-2xl">
+              <div className="w-full h-full relative overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop"
+                  alt="Creative Director"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
           </motion.div>
-
-          <Heading as="h2" variant="default" align="center" balance className="mb-6">
-            Un processus éprouvé en
-            <br />
-            <span className="gradient-text-orange">5 étapes simples</span>
-          </Heading>
-
-          <Text size="lg" color="secondary" align="center" className="max-w-3xl mx-auto">
-            De la première rencontre à la diffusion finale, nous vous accompagnons
-            à chaque étape pour garantir la réussite de votre projet.
-          </Text>
-        </motion.div>
-
-        {/* Timeline - REDESIGNED */}
-        <div className="max-w-6xl mx-auto">
-          {processSteps.map((step, index) => {
-            const isEven = index % 2 === 0;
-
-            return (
-              <motion.div
-                key={step.id}
-                initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`relative flex items-center mb-20 last:mb-0 ${
-                  isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                }`}
-              >
-                {/* Content Card */}
-                <div className="flex-1 lg:px-8">
-                  <motion.div
-                    whileHover={{ scale: 1.02, y: -8 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative group"
-                  >
-                    {/* Card Background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/[0.02] rounded-3xl backdrop-blur-xl border border-white/10 group-hover:border-saffron-orange/50 transition-all duration-500" />
-
-                    {/* Glow Effect */}
-                    <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-saffron-orange/10 to-amber/5 blur-xl -z-10" />
-
-                    {/* Card Content */}
-                    <div className="relative p-8 lg:p-10">
-                      {/* Step Number Badge */}
-                      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-saffron-orange to-amber text-black font-display font-black text-2xl mb-6 shadow-glow-orange-lg">
-                        {step.step}
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="text-3xl font-heading font-bold text-white mb-4 group-hover:text-saffron-orange transition-colors duration-300">
-                        {step.title}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-brand-grey text-lg leading-relaxed">
-                        {step.description}
-                      </p>
-
-                      {/* Bottom Accent */}
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-saffron-orange via-amber to-saffron-orange transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-3xl" />
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Timeline Dot - Center */}
-                <div className="hidden lg:flex items-center justify-center relative z-10">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.3 }}
-                    className="relative"
-                  >
-                    {/* Outer Ring */}
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-saffron-orange to-amber flex items-center justify-center shadow-glow-orange-lg">
-                      {/* Inner Dot */}
-                      <div className="w-6 h-6 rounded-full bg-black" />
-                    </div>
-
-                    {/* Pulsing Glow */}
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-gradient-to-br from-saffron-orange to-amber opacity-30 blur-xl"
-                      animate={{
-                        scale: [1, 1.3, 1],
-                        opacity: [0.3, 0.5, 0.3],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
-                    />
-                  </motion.div>
-                </div>
-
-                {/* Spacer for layout */}
-                <div className="hidden lg:block flex-1" />
-              </motion.div>
-            );
-          })}
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-24 text-center"
-        >
-          <div className="inline-flex flex-col items-center gap-6 p-10 rounded-3xl bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-xl border border-white/10 max-w-3xl">
-            <Heading as="h3" variant="default" align="center">
-              Prêt à démarrer ?
-            </Heading>
-            <Text size="base" color="secondary" align="center" className="max-w-xl">
-              Réservez un appel gratuit de 30 minutes pour discuter de votre projet
-              et découvrir comment nous pouvons vous aider.
-            </Text>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 px-10 py-5 rounded-xl bg-gradient-to-r from-saffron-orange to-amber text-black font-heading font-bold text-lg shadow-glow-orange-lg hover:shadow-glow-orange-xl transition-all duration-300"
-            >
-              Réserver un appel gratuit
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </motion.a>
-          </div>
-        </motion.div>
+        {/* Section Number */}
+        <div className="absolute bottom-8 left-6 md:left-12 lg:left-20">
+          <span className="text-6xl font-display font-black text-white/20">02</span>
+        </div>
+
+        {/* Side Label */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block">
+          <span className="text-sm font-display font-bold text-soft-steel-blue tracking-[0.3em] uppercase writing-vertical">
+            Vision & Mission
+          </span>
+        </div>
       </div>
+
+      {/* Mission Section - Light Background */}
+      <div className="relative bg-brand-off-white">
+        <div className="grid lg:grid-cols-2 min-h-[80vh]">
+          {/* Left - Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="relative hidden lg:block"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-brand-off-white/50 z-10" />
+            <Image
+              src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&auto=format&fit=crop"
+              alt="ALJ Studio Mission"
+              fill
+              className="object-cover grayscale"
+            />
+            {/* Framed Portrait */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-80 bg-white p-4 z-20 shadow-2xl">
+              <div className="w-full h-full relative overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop"
+                  alt="Team Member"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right - Content */}
+          <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-24">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <h2 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-midnight-navy leading-[0.85] tracking-tight mb-8">
+                ALJ
+                <br />
+                <span className="text-royal-blue">MISSION</span>
+              </h2>
+
+              <p className="text-lg md:text-xl text-midnight-navy/70 max-w-xl leading-relaxed font-body">
+                To deliver <span className="text-midnight-navy font-bold">high-quality</span>,{' '}
+                <span className="text-royal-blue font-semibold">strategic</span>, and{' '}
+                <span className="text-royal-blue font-semibold">innovative</span> video content, from ideation to execution, helping businesses grow through{' '}
+                <span className="text-saffron-orange font-bold">trust</span>,{' '}
+                <span className="text-saffron-orange font-bold">creativity</span>, and{' '}
+                <span className="text-saffron-orange font-bold">tailored visual experiences</span>.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Section Number */}
+        <div className="absolute bottom-8 right-6 md:right-12 lg:right-20">
+          <span className="text-6xl font-display font-black text-midnight-navy/10">03</span>
+        </div>
+      </div>
+
+      {/* Custom CSS for vertical text */}
+      <style jsx>{`
+        .writing-vertical {
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+        }
+      `}</style>
     </section>
   );
 }

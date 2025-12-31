@@ -2,31 +2,24 @@
 
 /**
  * Navbar Component - ALJ Studio Creative
- * Brand Book 2025 Compliant
- *
- * Sticky navigation with scroll progress indicator
- * Features: glassmorphism, mobile menu, brand CTA button
+ * Brand Book 2025 - Clean, Modern Navigation
  */
 
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
-import { navbarScroll } from '@/lib/animations';
 
-// Navigation items
 const navItems = [
+  { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
-  { label: 'Processus', href: '#process' },
-  { label: 'Créateurs', href: '#creators' },
+  { label: 'Vision', href: '#process' },
   { label: 'Portfolio', href: '#portfolio' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Scroll progress
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -43,7 +36,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when clicking nav items
   const handleNavClick = () => {
     setIsMobileMenuOpen(false);
   };
@@ -51,72 +43,75 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial="top"
-        animate={isScrolled ? 'scrolled' : 'top'}
-        variants={navbarScroll}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-midnight-navy/80 backdrop-blur-xl border-b border-soft-steel-blue/20'
+            ? 'bg-midnight-navy/95 backdrop-blur-xl'
             : 'bg-transparent'
         }`}
       >
-        <div className="container-site">
-          <div className="flex items-center justify-between py-4">
+        <div className="px-6 md:px-12 lg:px-20">
+          <div className="flex items-center justify-between py-5">
             {/* Logo */}
             <motion.a
               href="#"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-2xl font-display font-black text-white flex items-center gap-2"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-baseline gap-0.5 font-display font-black"
             >
-              ALJ <span className="text-saffron-orange">Creative</span>
+              <span className="text-2xl text-white">A</span>
+              <span className="text-xl text-white relative -top-0.5">L</span>
+              <span className="text-2xl text-white">J</span>
+              <span className="text-sm ml-1 text-saffron-orange font-semibold uppercase tracking-wider">
+                creative studio
+              </span>
             </motion.a>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-10">
               {navItems.map((item) => (
                 <motion.a
                   key={item.href}
                   href={item.href}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="font-heading text-base text-brand-off-white hover:text-saffron-orange transition-colors relative group"
+                  className="font-display text-sm text-white/70 hover:text-white uppercase tracking-wider transition-colors"
                 >
                   {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-saffron-orange to-amber group-hover:w-full transition-all duration-300" />
                 </motion.a>
               ))}
             </div>
 
             {/* CTA Button - Desktop */}
             <div className="hidden lg:block">
-              <Button
-                variant="primary"
-                size="md"
-                onClick={() => window.open('#contact', '_self')}
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-saffron-orange text-midnight-navy font-display font-bold text-sm uppercase tracking-wide hover:bg-amber transition-colors"
               >
-                Réserver un appel
-              </Button>
+                Get in Touch
+              </a>
             </div>
 
             {/* Mobile Menu Button */}
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden flex flex-col gap-1.5 w-8 h-8 items-center justify-center relative z-50"
+              className="lg:hidden flex flex-col gap-1.5 w-10 h-10 items-center justify-center"
               aria-label="Toggle menu"
             >
               <motion.span
-                animate={isMobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-brand-off-white block transition-all"
+                animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                className="w-6 h-0.5 bg-white block"
               />
               <motion.span
                 animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="w-6 h-0.5 bg-brand-off-white block transition-all"
+                className="w-6 h-0.5 bg-white block"
               />
               <motion.span
-                animate={isMobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-brand-off-white block transition-all"
+                animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                className="w-6 h-0.5 bg-white block"
               />
             </motion.button>
           </div>
@@ -124,7 +119,7 @@ export default function Navbar() {
 
         {/* Scroll Progress Bar */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-saffron-orange via-amber to-royal-blue origin-left"
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-saffron-orange via-amber to-royal-blue origin-left"
           style={{ scaleX }}
         />
       </motion.nav>
@@ -134,22 +129,8 @@ export default function Navbar() {
         initial={false}
         animate={isMobileMenuOpen ? 'open' : 'closed'}
         variants={{
-          open: {
-            opacity: 1,
-            x: 0,
-            transition: {
-              duration: 0.3,
-              ease: [0.16, 1, 0.3, 1],
-            },
-          },
-          closed: {
-            opacity: 0,
-            x: '100%',
-            transition: {
-              duration: 0.3,
-              ease: [0.16, 1, 0.3, 1],
-            },
-          },
+          open: { opacity: 1, pointerEvents: 'auto' as const },
+          closed: { opacity: 0, pointerEvents: 'none' as const },
         }}
         className="fixed inset-0 z-40 lg:hidden"
       >
@@ -160,29 +141,30 @@ export default function Navbar() {
             closed: { opacity: 0 },
           }}
           onClick={() => setIsMobileMenuOpen(false)}
-          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+          className="absolute inset-0 bg-midnight-navy/95 backdrop-blur-xl"
         />
 
-        {/* Menu Panel */}
+        {/* Menu Content */}
         <motion.div
           variants={{
             open: { x: 0 },
             closed: { x: '100%' },
           }}
-          className="absolute right-0 top-0 bottom-0 w-4/5 max-w-sm bg-midnight-navy border-l border-soft-steel-blue/20 shadow-2xl"
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-midnight-navy"
         >
-          <div className="flex flex-col h-full pt-24 px-8 pb-8">
+          <div className="flex flex-col h-full pt-28 px-8 pb-8">
             {/* Navigation Items */}
-            <nav className="flex flex-col gap-6 mb-8">
+            <nav className="flex flex-col gap-1 mb-8">
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.href}
                   href={item.href}
                   onClick={handleNavClick}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={isMobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={isMobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                   transition={{ delay: index * 0.1 }}
-                  className="font-heading text-2xl text-brand-off-white hover:text-saffron-orange transition-colors"
+                  className="py-4 font-display text-3xl text-white hover:text-saffron-orange transition-colors border-b border-white/10"
                 >
                   {item.label}
                 </motion.a>
@@ -195,28 +177,24 @@ export default function Navbar() {
               animate={isMobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: navItems.length * 0.1 }}
             >
-              <Button
-                variant="primary"
-                size="lg"
-                fullWidth
-                onClick={() => {
-                  window.open('#contact', '_self');
-                  setIsMobileMenuOpen(false);
-                }}
+              <a
+                href="#contact"
+                onClick={handleNavClick}
+                className="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-saffron-orange text-midnight-navy font-display font-bold text-lg uppercase tracking-wide"
               >
-                Réserver un appel
-              </Button>
+                Get in Touch
+              </a>
             </motion.div>
 
-            {/* Social Links (Optional) */}
+            {/* Footer */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={isMobileMenuOpen ? { opacity: 1 } : { opacity: 0 }}
               transition={{ delay: (navItems.length + 1) * 0.1 }}
-              className="mt-auto pt-8 border-t border-soft-steel-blue/20"
+              className="mt-auto pt-8 border-t border-white/10"
             >
-              <p className="text-sm text-brand-grey text-center font-body">
-                © 2025 ALJ Creative Studio
+              <p className="text-sm text-white/40 text-center font-body">
+                ALJCREATIVESTUDIO.COM
               </p>
             </motion.div>
           </div>

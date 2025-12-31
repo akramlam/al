@@ -1,29 +1,6 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Montserrat, Inter } from "next/font/google";
-// import localFont from "next/font/local"; // Uncomment when adding licensed fonts
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
-
-// Google Fonts - Primary & Display
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-primary",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const montserrat = Montserrat({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 // Licensed Fonts - Local (user provides font files)
 // NOTE: Uncomment these when you add the licensed font files to src/fonts/
@@ -89,9 +66,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body
-        className={`${plusJakartaSans.variable} ${montserrat.variable} ${inter.variable} antialiased`}
-      >
+      <body className="antialiased">
         {children}
         <Analytics />
       </body>
